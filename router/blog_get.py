@@ -46,7 +46,8 @@ def get_blog_type(type: BlogType, req_parameter: dict = Depends(required_functio
 def get_blog(id: int, response: Response, req_parameter: dict = Depends(required_functionality)):
   if id > 5:
     response.status_code = status.HTTP_404_NOT_FOUND
-    return {'message': f'Blog id {id} not found'}
+    return {'error': f'Blog id {id} not found'}
   else:
+    response.status_code = status.HTTP_200_OK
     return {'message': f'Blog id: {id}'}
  
