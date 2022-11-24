@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
 from main import app
+from fastapi.templating import Jinja2Templates
 
 client = TestClient(app)
 
@@ -18,4 +19,34 @@ def test_auth_error():
   assert message == "field required"
 
 def test_auth_success():
-  pass
+  response = client.post("/token",
+  data={"username":"cat", "password":"cat"}
+  )
+  access_token = response.json().get("access_token")
+  assert access_token
+
+
+
+def test_post_article():
+  auth = client.post("/token",
+  data={"username": "cat", "password" : "cat"}
+  )
+  access_token = auth.json().get("access_token")
+  
+  assert access_token
+  
+  response = client.post(
+    "/article/",
+    json={
+      "title": "Test article",
+      "published": True,
+      "creator_id": 1,
+      "content": "Test Content"
+    },
+    headers={
+      "Authorization": "bearer " + access_token
+    }
+  )
+
+  assert response.status_code == 200
+  assert response.json().get("title") == "Test article"
