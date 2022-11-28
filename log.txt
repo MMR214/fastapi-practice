@@ -1,1 +1,5 @@
-MyAPI: Call to get all products
+MyAPI: Template read for product with id 1
+MyApp: this is a test from my testthis is a test from my testthis is a test from my testthis is a test from my testthis is a test from my test
+	http://127.0.0.1:8000/dependencies/?tag=MyApp&message=this%20is%20a%20test%20from%20my%20testthis%20is%20a%20test%20from%20my%20testthis%20is%20a%20test%20from%20my%20testthis%20is%20a%20test%20from%20my%20testthis%20is%20a%20test%20from%20my%20test&separator=-
+MyApp: this is a test message
+	http://127.0.0.1:8000/dependencies/?tag=MyApp&message=this%20is%20a%20test%20message&separator=%23%23%23

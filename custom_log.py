@@ -1,3 +1,6 @@
-def log(tag="", message=""):
-  with open("log.txt", "w+") as log:
+from starlette.requests import Request
+
+def log(tag="MyApp", message="", request: Request = None):
+  with open("log.txt", "a+") as log:
     log.write(f"{tag}: {message}\n")
+    log.write(f"\t{request.url}\n")
